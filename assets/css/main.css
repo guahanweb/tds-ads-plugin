@@ -1,0 +1,32 @@
+.alert {
+    border: 1px solid #e5e5e5;
+    padding: 0.4em 1em 1.4em 1em;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.alert h3.key-status {
+    color: #fff;
+    margin: 1em 0 0.5em 0;
+}
+
+.alert.critical {
+    background-color: #993300;
+}
+
+.alert.active {
+    background-color: #649316;
+}
+
+.alert p.key-status {
+    font-size: 24px;
+}
+
+.alert p.description {
+    color: #fff;
+    font-size: 14px;
+    margin: 0 0;
+    font-style: normal;
+}

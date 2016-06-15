@@ -17,14 +17,13 @@ class Settings {
 
     public function configure() {
         $config = GW\Config::instance(TDS_ADS_PLUGIN_NAME);
-        $config->add('options', 'tds_ads_plugin_options');
         $this->config = $config;
     }
 
     public function defaults() {
-        if (\get_option($this->config->options) === false) {
+        if (\get_option($this->config->settings_opt) === false) {
             $opts = array('foo' => 'bar');
-            \add_option($this->config->options, $opts);
+            \add_option($this->config->settings_opt, $opts);
         }
     }
 
@@ -90,6 +89,7 @@ class Settings {
     }
 
     private function renderOptionsPage() {
-
+        View::render('config', array(
+        ));
     }
 }
