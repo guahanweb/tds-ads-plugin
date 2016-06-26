@@ -41,7 +41,8 @@ class Settings {
     }
 
     public function setupAdminMenu() {
-        $this->addOptionsPage();
+        // $this->addOptionsPage();
+        $this->addPluginMenu();
     }
 
     public function adminHelp() {
@@ -58,6 +59,27 @@ class Settings {
                 )
             );
 
+            $current_screen->add_help_tab(
+                array(
+                    'id' => 'advertisements',
+                    'title' => __('Advertisements', $this->config->domain),
+                    'content' => 
+                        '<p><strong>' . esc_html__('TDS Ads :: Advertisements', $this->config->domain) . '</strong></p>' .
+                        '<p>' . esc_html__('The advertisements section will allow you to modify both advertisers and individual advertisements that can be referenced from within campaigns.', $this->config->domain) . '</p>'
+                )
+            );
+
+            $current_screen->add_help_tab(
+                array(
+                    'id' => 'campaigns',
+                    'title' => __('Campaigns', $this->config->domain),
+                    'content' => 
+                        '<p><strong>' . esc_html__('Campaigns', $this->config->domain) . '</strong></p>' .
+                        '<p>' . esc_html__('Campaign creation will provide hooks that will inject advertisements into a list of posts on the site.', $this->config->domain) . '</p>' .
+                        '<p>' . esc_html__('This page allows you to configure your campaign definition and display rules for those hooks.', $this->config->domain) . '</p>'
+                )
+            );
+
             $current_screen->set_help_sidebar(
                 '<p><strong>' . esc_html__('For more information:', $this->config->domain) . '</strong></p>' .
                 '<p>Contact Mac Slavo :)</p>'
@@ -65,27 +87,43 @@ class Settings {
         }
     }
 
-    public function renderPage() {
-        if (isset($_GET['view']) && $_GET['view'] == 'foobar') {
-            echo 'foobar';
-        } else {
-            $this->renderOptionsPage();
-        }
+    public function renderDashboard() {
+        $page = new Pages\Dashboard();
+        $page->process();
+        $page->render();
+    }
+
+    public function renderAdsPage() {
+        $page = new Pages\Advertisements();
+        $page->process();
+        $page->render();
+    }
+
+    public function renderCampaignsPage() {
+        $page = new Pages\Campaigns();
+        $page->process();
+        $page->render();
     }
 
     public function listen() {
-        // Actions
-        \add_action('admin_menu', array($this, 'setupAdminMenu'), 5);
-
-        // Filters
-        \add_filter('plugin_action_links_' . $this->config->basename, array($this, 'addPluginSettingsLink'));
+        add_action('admin_menu', array($this, 'setupAdminMenu'), 5);
+        add_filter('plugin_action_links_' . $this->config->basename, array($this, 'addPluginSettingsLink'));
     }
 
-    private function addOptionsPage() {
-        $hook = add_options_page(__('TDS Ads', $this->config->domain), __('TDS Ads', $this->config->domain), 'manage_options', 'tds-ads-config', array($this, 'renderPage'));
+    private function addPluginMenu() {
+        $hooks = array(
+            add_menu_page(__('TDS Ads', $this->config->domain), __('TDS Ads', $this->config->domain), 'manage_options', 'tds-ads-plugin-home', array($this, 'renderDashboard'), 'dashicons-money', 30),
+            add_submenu_page('tds-ads-plugin-home', __('Dashboard', $this->config->domain), __('Dashboard', $this->config->domain), 'manage_options', 'tds-ads-plugin-home', array($this, 'renderDashboard')),
+            add_submenu_page('tds-ads-plugin-home', __('Advertisements', $this->config->domain), __('Advertisements', $this->config->domain), 'manage_options', 'tds-ads-plugin-advertisements', array($this, 'renderAdsPage')),
+            add_submenu_page('tds-ads-plugin-home', __('Campaigns', $this->config->domain), __('Campaigns', $this->config->domain), 'manage_options', 'tds-ads-plugin-campaigns', array($this, 'renderCampaignsPage'))
+        );
+
         if (version_compare($GLOBALS['wp_version'], '3.3', '>=')) {
-            add_action("load-$hook", array($this, 'adminHelp'));
+            foreach ($hooks as $hook) {
+                add_action("load-$hook", array($this, 'adminHelp'));
+            }
         }
+
     }
 
     private function renderOptionsPage() {

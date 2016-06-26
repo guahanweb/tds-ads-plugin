@@ -29,7 +29,7 @@ class Tables {
             $file = $config->plugin_path . 'assets/sql/' . $table . '.sql';
             $sql = str_replace(
                 array('{{TABLE}}', '{{PREFIX}}', '{{CHARSET}}'),
-                array($prefix . $table, $config->dbprefix, $charset_collate),
+                array($config->dbprefix . $table, $config->dbprefix, $charset_collate),
                 file_get_contents($file)
             );
             $createSql .= $sql;

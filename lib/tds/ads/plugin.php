@@ -61,6 +61,7 @@ class Plugin {
     private function modules() {
         $settings = Admin\Settings::instance();
         $view = Admin\View::instance();
+        $api = Admin\API::instance();
     }
 }
 

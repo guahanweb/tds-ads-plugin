@@ -1,6 +1,13 @@
-<?php if ($type == 'alert'): ?>
+<?php if ($type == 'success'): ?>
 <div class="wrap alert active">
-    <h3 class="key-status failed"><?php esc_html_e("This is a header"); ?></h3>
-    <p class="description">This is some content to go within the alert notification!</p>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+    <h3 class="key-status active"><?php esc_html_e("Success"); ?></h3>
+    <p class="description"><?php esc_html_e($msg); ?></p>
+</div>
+<?php elseif ($type == 'failure'): ?>
+<div class="wrap alert failure">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+    <h3 class="key-status failure"><?php esc_html_e("Failure"); ?></h3>
+    <p class="description"><?php esc_html_e($msg); ?></p>
 </div>
 <?php endif; ?>

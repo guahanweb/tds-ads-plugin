@@ -32,14 +32,17 @@ class View {
 
     public function loadResources() {
         global $hook_suffix;
-        $supported = array('settings_page_tds-ads-config');
-        if (in_array($hook_suffix, $supported)) {
-            wp_register_style('tds_ads.css', $this->config->plugin_uri . 'assets/css/main.css', array(), $this->config->version);
+        if (preg_match('/page_tds-ads/', $hook_suffix)) {
+            wp_register_style('font-awesome', $this->config->plugin_uri . 'assets/font-awesome/css/font-awesome.min.css', array(), $this->config->version);
+            wp_register_style('tds_ads.css', $this->config->plugin_uri . 'assets/css/main.css', array('font-awesome'), $this->config->version);
             wp_enqueue_style('tds_ads.css');
+
+            wp_register_script('tds_admin.js', $this->config->plugin_uri . 'assets/js/admin.js', array(), $this->config->version);
+            wp_enqueue_script('tds_admin.js');
         }
     }
 
     private function listen() {
-        \add_action('admin_enqueue_scripts', array($this, 'loadResources'));
+        add_action('admin_enqueue_scripts', array($this, 'loadResources'));
     }
 }
