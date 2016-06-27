@@ -29,6 +29,8 @@
                     console.info('unknown action');
             }
         });
+
+        $(document).on('click', '[data-tds="advertiser"]', handleAdvertiserClick);
     }
 
     function switchModalContent(action) {
@@ -52,6 +54,18 @@
         }, function (err) {
             console.error(err);
         });
+    }
+
+    function handleAdvertiserClick(e) {
+        var $input;
+        var $el = $(this);
+        if ($el.data('action') == 'remove') {
+            if (confirm('Are you sure you wish to permanently delete\nthis advertiser from your listing?')) {
+                $input = $('#tds-advertiser-delete-id');
+                $input.val($(this).data('id'));
+                $input.closest('form').submit();
+            }
+        }
     }
 
     function showAddAdvertisement() {

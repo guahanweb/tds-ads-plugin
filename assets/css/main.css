@@ -142,6 +142,20 @@
 
 .toolbar button.add { color: #336600; }
 
+button.remove {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: rgba(255, 0, 0, 0.5);
+    padding: 2px;
+    float: right;
+}
+
+button.remove:hover {
+    color: rgba(255, 0, 0, 1);
+}
+
 /* MODAL STYLES */
 .modal-content label {
     display: block;

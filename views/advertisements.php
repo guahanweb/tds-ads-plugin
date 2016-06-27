@@ -12,11 +12,15 @@
                     </div>
                 </header>
                 <section class="content">
+                    <!-- Hidden form to handle deletion -->
+                    <form name="tds-advertiser-delete" id="tds-advertiser-delete" action="" method="POST">
+                        <input type="hidden" name="tds-advertiser-delete-id" id="tds-advertiser-delete-id" value="">
+                    </form>
 <?php
 if (count($advertisers) > 0) {
-    echo "<ul class=\"advertisers\">\n";
+    echo "<ul class=\"listing advertiser-list\">\n";
     foreach ($advertisers as $advertiser) {
-        echo "<li>" . $advertiser['name'] . "</li>";
+        echo "<li class=\"advrtiser\">" . $advertiser['name'] . "<button type=\"button\" class=\"remove\" data-action=\"remove\" data-tds=\"advertiser\" data-id=\"${advertiser['id']}\">&times;</button></li>";
     }
     echo "</ul>\n";
 } else {

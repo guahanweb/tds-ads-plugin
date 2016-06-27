@@ -16,6 +16,8 @@ class Advertisements {
             if ($_POST['action'] == 'tds-add-advertiser') {
                 $this->createAdvertiser();
             }
+        } elseif (isset($_POST['tds-advertiser-delete-id'])) {
+            $this->deleteAdvertiser();
         }
     }
 
@@ -31,12 +33,34 @@ class Advertisements {
 
         if (false === $res) {
             $this->notice = array(
-                'type' => 'failure'
+                'type' => 'failure',
+                'msg' => 'Could not create advertiser'
             );
         } else {
             $this->notice = array(
                 'type' => 'success',
                 'msg' => 'Advertiser successfully created'
+            );
+        }
+    }
+
+    public function deleteAdvertiser() {
+        global $wpdb;
+
+        $id = intval($_POST['tds-advertiser-delete-id']);
+        $res = $wpdb->delete($this->config->dbprefix . 'advertisers', array(
+            'id' => $id
+        ), array('%d'));
+
+        if (false === $res) {
+            $this->notice = array(
+                'type' => 'failure',
+                'msg' => 'Could not remove advertiser'
+            );
+        } else {
+            $this->notice = array(
+                'type' => 'success',
+                'msg' => 'Advertiser successfully deleted'
             );
         }
     }
