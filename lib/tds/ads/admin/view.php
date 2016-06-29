@@ -37,7 +37,8 @@ class View {
             wp_register_style('tds_ads.css', $this->config->plugin_uri . 'assets/css/main.css', array('font-awesome'), $this->config->version);
             wp_enqueue_style('tds_ads.css');
 
-            wp_register_script('tds_admin.js', $this->config->plugin_uri . 'assets/js/admin.js', array(), $this->config->version);
+            wp_register_script('ace-editor', $this->config->plugin_uri . 'assets/ace/ace.js', array(), $this->config->version);
+            wp_register_script('tds_admin.js', $this->config->plugin_uri . 'assets/js/admin.js', array('ace-editor'), $this->config->version);
             wp_enqueue_script('tds_admin.js');
         }
     }

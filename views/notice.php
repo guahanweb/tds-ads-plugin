@@ -5,7 +5,7 @@
     <p class="description"><?php esc_html_e($msg); ?></p>
 </div>
 <?php elseif ($type == 'failure'): ?>
-<div class="wrap alert failure">
+<div class="wrap alert critical">
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
     <h3 class="key-status failure"><?php esc_html_e("Failure"); ?></h3>
     <p class="description"><?php esc_html_e($msg); ?></p>

@@ -11,6 +11,7 @@ class API {
 
         if (null === $instance) {
             $instance = new API();
+            $instance->config = GW\Config::instance(TDS_ADS_PLUGIN_NAME);
             $instance->register();
         }
 
@@ -19,8 +20,7 @@ class API {
 
     private function __construct() {
         $this->actions = array(
-            'add_advertiser',
-            'add_advertisement'
+            'load_advertisement'
         );
     }
 
@@ -36,13 +36,23 @@ class API {
     }
 
     // API handlers
-    public function handle_add_advertiser() {
+    public function handle_load_advertisement() {
         global $wpdb;
-        $this->reply(array('hello' => 'world'));
-    }
 
-    public function handle_add_advertisement() {
-        global $wpdb;
-        $this->reply(array('foo' => 'bar'));
+        $id = isset($_POST['id']) ? intval($_POST['id']) : 0;
+
+        $table = $this->config->dbprefix . 'ads';
+        $sql = <<<EOQ
+SELECT * FROM %s
+WHERE id = %d
+LIMIT 1
+EOQ;
+
+        $data = $wpdb->get_results(sprintf($sql, $table, $id), ARRAY_A);
+        if (count($data) === 1) {
+            $this->reply($data[0]);
+        } else {
+            $this->reply(false);
+        }
     }
 }

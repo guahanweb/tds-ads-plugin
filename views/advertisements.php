@@ -37,7 +37,32 @@ if (count($advertisers) > 0) {
                     </div>
                 </header>
                 <section class="content">
-                    List of advertisements goes here
+                    <!-- Hidden form to handle deletion -->
+                    <form name="tds-advertisement-delete" id="tds-advertisement-delete" action="" method="POST">
+                        <input type="hidden" name="tds-advertisement-delete-id" id="tds-advertisement-delete-id" value="">
+                    </form>
+<?php
+$tpl = <<<EOT
+<div class="ad-item">
+    <div class="controls">
+        <button type="button" class="fa fa-edit" data-tds="modal" data-action="edit-advertisement" data-id="%d"></button>
+        <button type="button" class="fa fa-remove" data-tds="advertisement" data-action="remove" data-id="%d"></button>
+    </div>
+    <h3>%s</h3>
+    <div class="item-body">
+        <p class="about">%s</p>
+    </div>
+</div>
+EOT;
+
+if (count($advertisements) > 0) {
+    foreach ($advertisements as $advertisement) {
+        printf($tpl, $advertisement['id'], $advertisement['id'], esc_html($advertisement['name']), esc_html($advertisement['description']));
+    }
+} else {
+    echo "<p class=\"no-results\">No advertisements</p>";
+}
+?>
                 </section>
             </div>
         </div>
@@ -53,7 +78,7 @@ if (count($advertisers) > 0) {
             </div>
             <div class="input-group">
                 <label for="advertiser-description">Description</label>
-                <textarea name="description" id="advertiser-description"></textarea>
+                <textarea name="description" id="advertiser-description" rows="3"></textarea>
             </div>
             <div class="input-submission">
                 <input type="submit" name="submit" value="Submit">
@@ -61,6 +86,37 @@ if (count($advertisers) > 0) {
         </form>
     </div>
     <div class="modal-content add-advertisement">
-        <p>Some advertisement form goes here</p>
+        <form name="tds-advertisement-form" id="tds-advertisement-form" action="" method="POST">
+            <input type="hidden" name="action" value="tds-add-advertisement">
+            <div class="input-group">
+                <label for="advertisement-advertiser">Advertiser</label>
+                <select name="advertiser" id="advertisement-advertiser">
+                    <option value="">Choose one...</option>
+<?php
+foreach ($advertisers as $advertiser) {
+    printf('<option value="%d">%s</option>', intval($advertiser['id']), esc_html($advertiser['name']));
+}
+?>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="advertisement-name">Name</label>
+                <input type="text" name="name" id="advertisement-name">
+            </div>
+            <div class="input-group">
+                <label for="advertisement-description">Description</label>
+                <textarea name="description" id="advertisement-description" rows="3"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="advertisement-content">Content</label>
+                <textarea name="content" id="advertisement-content" class="ad-content" rows="10"></textarea>
+                <div class="editor-wrap">
+                    <div id="editor"></div>
+                </div>
+            </div>
+            <div class="input-submission">
+                <input type="submit" name="submit" value="Submit">
+            </div>
+        </form>
     </div>
 </div>
