@@ -5,7 +5,7 @@
     <div class="dashboard">
         <div class="widget widget-list">
             <div class="controls">
-                <button class="btn btn-action">New Campaign</button>
+            <a class="btn btn-action" href="<?php echo $new_link; ?>">New Campaign</a>
             </div>
             <table class="campaigns campaign-list" border="0" cellpadding="0" cellspacing="0">
                 <thead>

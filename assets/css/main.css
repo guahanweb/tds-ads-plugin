@@ -156,6 +156,8 @@ button.remove:hover {
     color: rgba(255, 0, 0, 1);
 }
 
+/* AD VIEW */
+
 .ad-item {
     margin: 0 -10px;
     padding: 10px;
@@ -215,6 +217,75 @@ button.remove:hover {
     padding-left: 15px;
 }
 
+/* CAMPAIGN VIEW */
+.btn {
+    border: 1px solid #aaa;
+    background-color: #f4f4f4;
+    border-radius: 3px;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 32px;
+    vertical-align: middle;
+    display: inline-block;
+    padding: 0 8px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #eaeaea;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn.btn-action {
+    background-color: #5cb85c;
+    color: #fff;
+    border-color: #4cae4c;
+}
+
+.btn.btn-action:hover {
+    background-color: #449d44;
+    border-color: #398439;
+}
+
+.btn.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.btn.btn-primary:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+
+.campaigns {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.campaigns th {
+    text-align: left;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+    border-bottom: 1px solid #aaa;
+    color: #777;
+    text-shadow: 1px 1px 0 #fff;
+    padding: 4px;
+}
+
+.campaigns td {
+    font-size: 12px;
+    line-height: 18px;
+    vertical-align: middle;
+    background-color: #f4f4f4;
+    padding: 4px;
+}
+
+.campaigns .odd > td {
+    background-color: #fff;
+}
+
 /* MODAL STYLES */
 .modal-content label {
     display: block;
@@ -248,4 +319,189 @@ button.remove:hover {
     right: 0;
     bottom: 0;
     left: 0;
+}
+
+/* CAMPAIGN FORM STYLES */
+
+.tabs {
+
+}
+
+.tabs ul {
+    margin: 0;
+    padding: 0;
+}
+
+.tabs li {
+    display: inline-block;
+    margin: 0;
+    padding: 0 0 0 4px;
+}
+
+.tabs li:first-child {
+    padding-left: 0;
+}
+
+.tabs li > a {
+    display: block;
+    padding: 8px 15px;
+    background-color: #efefef;
+    text-decoration: none;
+}
+
+.tabs li > a:hover {
+    background-color: #e6e6e6;
+}
+
+.tabs li.current > a {
+    background-color: #fff;
+}
+
+.tabs li.disabled > a {
+    background-color: #efefef;
+    color: #aaa;
+    cursor: default;
+}
+
+.tab-content {
+    padding: 5px 15px;
+    background-color: #fff;
+}
+
+.campaign-form .field {
+    padding: 5px 0;
+}
+
+.campaign-form fieldset {
+    margin-top: 25px;
+}
+
+.campaign-form fieldset:first-child {
+    margin-top: 10px;
+}
+
+.campaign-form legend {
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0 0 5px;
+    padding: 0;
+}
+
+.campaign-form .legend-help {
+    font-size: 12px;
+    color: #aaa;
+    font-weight: 300;
+    margin: -5px 0 5px;
+}
+
+.campaign-form label {
+    width: 100%;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    display: block;
+}
+
+.campaign-form .field > .field-helper {
+    margin: 0;
+    padding: 0;
+    font-size: 11px;
+    color: #666;
+    line-height: 16px;
+    font-style: italic;
+}
+
+.campaign-form .ad-column {
+    display: inline-block;
+}
+
+.campaign-form .ad-column:first-child {
+    width: 280px;
+}
+
+.campaign-form .ad-details h4 {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.campaign-form .ad-details .advertiser {
+    margin: 0 0 0 25px;
+    padding-bottom: 0;
+    font-size: 11px;
+    color: #8ab;
+    font-weight: 300;
+}
+
+.campaign-form .ad-details .advertiser > span {
+    font-weight: 400;
+}
+
+.ad-controls .no-slots {
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fafafa;
+    padding: 10px 0 20px;
+    text-align: center;
+}
+
+.ad-controls .no-slots h3 {
+    font-weight: 300;
+    padding: 0;
+    margin-bottom: 2px;
+    font-size: 18px;
+}
+
+.ad-controls .no-slots p {
+    margin-top: 10px;
+    padding: 0;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.ad-slots-list > .list-controls {
+    padding: 10px 0;
+    float: none;
+}
+
+.ad-slots-list > .list-controls .btn {
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.ad-slot {
+    display: block;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.12);
+    height: 32px;
+    margin: 8px 0;
+}
+
+.ad-slot .slot-option {
+    display: inline-block;
+    height: 100%;
+}
+
+.ad-slot .slot-option > span {
+    line-height: 32px;
+    vertical-align: middle;
+}
+
+.ad-slot .slot-option.option-label {
+    width: 120px;
+    background-color: #efefef;
+    border-right: 1px solid #ccc;
+    padding-left: 10px;
+}
+
+.ad-slot .slot-option.option-label h4 {
+    font-weight: 300;
+    color: #666;
+    text-shadow: 1px 1px 1px #fff;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    line-height: 32px;
 }

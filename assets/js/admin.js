@@ -70,12 +70,17 @@
             }
         });
 
-        $(document).on('click', '[data-tds="advertiser"]', handleAdvertiserClick);
-        $(document).on('click', '[data-tds="advertisement"]', handleAdvertisementClick);
-        setupEditor();
+        if (document.getElementById('editor')) {
+            initAdPages();
+        } else {
+            initCampaignPages();
+        }
     }
 
-    function setupEditor() {
+    function initAdPages() {
+        $(document).on('click', '[data-tds="advertiser"]', handleAdvertiserClick);
+        $(document).on('click', '[data-tds="advertisement"]', handleAdvertisementClick);
+
         $editor = ace.edit('editor');
         $editor.setTheme('ace/theme/monokai');
         $editor.getSession().setMode('ace/mode/html');
@@ -86,6 +91,17 @@
             $content.val($editor.getValue());
             return true; // continue processing
         });
+    }
+
+    var $slot_tpl, $slot_container, $slot_splash;
+    function initCampaignPages() {
+        $slot_tpl = $('#tpl-ad-slot').html();
+        $slot_container = $('#campaign-view-slots');
+        $slot_splash = $('#campaign-view-splash');
+
+        // Set up campaign ad slot editor
+        $(document).on('click', '#new-campaign-add-slot', handleNewCampaignAddSlotClick);
+        $(document).on('click', '#campaign-add-slot', handleAddSlotClick);
     }
 
     function switchModalContent(action) {
@@ -141,5 +157,21 @@
         return $.post(ajaxurl, data, function (res) {
             cb(JSON.parse(res));
         });
+    }
+
+    function handleNewCampaignAddSlotClick(e) {
+        handleAddSlotClick(e);
+
+        // We need to shift view, since this was the first addition
+        $slot_container.removeClass('hidden');
+        $slot_splash.addClass('hidden');
+    }
+
+    function handleAddSlotClick(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var $node = $($slot_tpl);
+        $slot_container.append($node);
     }
 })(jQuery);

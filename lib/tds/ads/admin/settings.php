@@ -100,9 +100,26 @@ class Settings {
     }
 
     public function renderCampaignsPage() {
-        $page = new Pages\Campaigns();
-        $page->process();
-        $page->render();
+        $action = isset($_GET['action']) ? trim($_GET['action']) : 'list';
+
+        switch ($action) {
+            case 'create':
+                $page = new Pages\Campaigns();
+                $page->process();
+                $page->renderCreate();
+                break;
+
+            case 'edit':
+                $page = new Pages\Campaigns();
+                $page->process();
+                $page->renderUpdate();
+                break;
+
+            default: // list view
+                $page = new Pages\CampaignList();
+                $page->process();
+                $page->render();
+        }
     }
 
     public function listen() {
