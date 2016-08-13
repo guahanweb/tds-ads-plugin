@@ -4,5 +4,6 @@ CREATE TABLE {{TABLE}} (
     ad_id INTEGER UNSIGNED NOT NULL,
     start_date DATETIME DEFAULT '0000-00-00 00:00:00',
     end_date DATETIME DEFAULT '9999-12-31 23:59:59',
-    PRIMARY KEY  (id)
+    PRIMARY KEY  (id),
+    UNIQUE KEY  (campaign_id, ad_id)
 ) {{CHARSET}};

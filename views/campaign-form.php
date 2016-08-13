@@ -10,11 +10,11 @@
     <div class="tabs">
         <ul>
             <li class="current"><a href="#">Details</a></li>
-    <?php if ($action == 'edit') { ?>
-    <li><a href="#">Display</a></li>
-    <?php } else { ?>
-        <li class="disabled"><a href="#">Display</a></li>
-    <?php } ?>
+            <?php if ($action == 'edit') { ?>
+            <li><a href="<?php echo $link_view; ?>">Display</a></li>
+            <?php } else { ?>
+            <li class="disabled"><a href="#">Display</a></li>
+            <?php } ?>
         </ul>
     </div>
     <div class="tab-content">
@@ -39,17 +39,32 @@
 $split = floor(count($ads) / 2);
 $tpl = <<<EOA
 <div class="ad-details">
-    <label><input type="checkbox" name="campaign-ads[]" value="%d">
+    <label><input type="checkbox" name="campaign-ads[]" value="%d"%s>
     <span class="name">%s</span></label>
     <p class="advertiser">by <span>%s</span></p>
 </div>
 EOA;
+
 for ($i = 0; $i < 2; $i++) {
     echo '<div class="ad-column">';
     $start = $split * $i;
     $end = $start == 0 ? $split : count($ads);
     for ($x = $start; $x < $end; $x++) {
-        printf($tpl, $ads[$x]['id'], esc_html($ads[$x]['name']), esc_html($ads[$x]['advertiser']));
+        $checked = false;
+        if (isset($campaign_ads)) {
+            foreach ($campaign_ads as $cad) {
+                if ($cad['ad_id'] == $ads[$x]['id']) {
+                    $checked = true;
+                }
+            }
+        }
+
+        printf($tpl, 
+            $ads[$x]['id'], 
+            ($checked) ? ' checked="checked"' : '',
+            esc_html($ads[$x]['name']), 
+            esc_html($ads[$x]['advertiser'])
+        );
     }
     echo '</div>';
 }

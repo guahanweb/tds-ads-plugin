@@ -324,7 +324,7 @@ button.remove:hover {
 /* CAMPAIGN FORM STYLES */
 
 .tabs {
-
+    margin-top: 15px;
 }
 
 .tabs ul {
@@ -471,10 +471,10 @@ button.remove:hover {
 
 .ad-slot {
     display: block;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
     overflow: hidden;
-    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
     height: 32px;
     margin: 8px 0;
 }
@@ -482,11 +482,25 @@ button.remove:hover {
 .ad-slot .slot-option {
     display: inline-block;
     height: 100%;
+    padding: 0 10px;
 }
 
-.ad-slot .slot-option > span {
-    line-height: 32px;
-    vertical-align: middle;
+.ad-slot .slot-option select {
+    padding: 0;
+    line-height: 1em;
+    height: auto;
+    vertical-align: baseline;
+}
+
+.ad-slot .slot-option > p {
+    margin: 0;
+    padding: 0;
+}
+
+.ad-slot .slot-option > p.info {
+    font-size: 11px;
+    font-style: italic;
+    color: #aaa;
 }
 
 .ad-slot .slot-option.option-label {

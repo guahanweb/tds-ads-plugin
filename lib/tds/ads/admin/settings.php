@@ -101,24 +101,20 @@ class Settings {
 
     public function renderCampaignsPage() {
         $action = isset($_GET['action']) ? trim($_GET['action']) : 'list';
+        $id = isset($_GET['id']) ? intval($_GET['id']) : null;
 
-        switch ($action) {
-            case 'create':
-                $page = new Pages\Campaigns();
-                $page->process();
-                $page->renderCreate();
-                break;
-
-            case 'edit':
-                $page = new Pages\Campaigns();
-                $page->process();
-                $page->renderUpdate();
-                break;
-
-            default: // list view
-                $page = new Pages\CampaignList();
-                $page->process();
-                $page->render();
+        if ($action == 'create') {
+            $page = new Pages\Campaigns();
+            $page->process($id);
+            $page->renderCreate();
+        } elseif ($action == 'edit') {
+            $page = new Pages\Campaigns();
+            $page->process($id);
+            $page->renderUpdate();
+        } else {
+            $page = new Pages\CampaignList();
+            $page->process();
+            $page->render();
         }
     }
 

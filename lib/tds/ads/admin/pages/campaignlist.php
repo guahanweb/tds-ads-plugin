@@ -44,19 +44,19 @@ EOS;
             $campaigns[$i]['ads'] = $wpdb->get_results($sql, ARRAY_A);
         }
 
-        echo '<pre>' . print_r($campaigns, true) . '</pre>';
         return $campaigns;
     }
 
-    public function getNewLink() {
+    public function getPageLink($action = 'create') {
         $parts = array('page=' . $_GET['page']);
-        $parts[] = 'action=create';
+        $parts[] = 'action=' . $action;
         return '?' . implode('&', $parts);
     }
 
     public function render() {
         Admin\View::render('campaign-list', array(
-            'new_link' => $this->getNewLink(),
+            'new_link' => $this->getPageLink(),
+            'edit_link' => $this->getPageLink('edit'),
             'campaigns' => $this->loadCampaigns()
         ));
     }

@@ -25,7 +25,7 @@ $tpl = <<<EOT
     <td class="hook">%s</td>
     <td class="created">%s</td>
     <td class="ads">%s</td>
-    <td class="actions">%s</td>
+    <td class="actions"><a href="${edit_link}&id=%d"><i class="fa fa-edit"></i></a></td>
 </tr>
 EOT;
 
@@ -42,7 +42,7 @@ foreach ($campaigns as $i => $campaign) {
         $campaign['hook'],
         date('F j, Y, h:i:s a', strtotime($campaign['created'])),
         implode('<br>', $ads),
-        'actions'
+        $campaign['id']
     );
 }
 ?>

@@ -93,11 +93,12 @@
         });
     }
 
-    var $slot_tpl, $slot_container, $slot_splash;
+    var $slot_tpl, $slot_container, $slot_splash, slot_index;
     function initCampaignPages() {
         $slot_tpl = $('#tpl-ad-slot').html();
         $slot_container = $('#campaign-view-slots');
         $slot_splash = $('#campaign-view-splash');
+        slot_index = SLOTS_LAST_INDEX || 0;
 
         // Set up campaign ad slot editor
         $(document).on('click', '#new-campaign-add-slot', handleNewCampaignAddSlotClick);
@@ -172,6 +173,7 @@
         e.stopPropagation();
 
         var $node = $($slot_tpl);
+        $node.find('span.index-holder').html(++slot_index);
         $slot_container.append($node);
     }
 })(jQuery);
