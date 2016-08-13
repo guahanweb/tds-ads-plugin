@@ -128,8 +128,10 @@ EOQ;
                     ), array('%d', '%d'));
                 }
 
-                // If we were successful, redirect to the next step
-                wp_redirect(admin_url('/page=tds-ads-plugin-campaigns&action=create&id=' . $this->campaign_id, 'http'));
+                // If we were successful, redirect to the next step.
+                // We cannot do this in PHP due to headers already sent
+                $url = admin_url('admin.php?page=tds-ads-plugin-campaigns&action=edit&view=view&&id=' . $campaign_id, 'http');
+                printf('<script>window.location = "%s";</script>', $url);
                 exit;
 
                 $this->force_update = true;
@@ -234,6 +236,7 @@ EOQ;
 
     public function process($id = null) {
         $this->campaign_id = $id;
+
         $this->loadDetails();
         $this->loadView();
 
@@ -243,25 +246,33 @@ EOQ;
         );
 
         $this->data = array();
+        $this->data['campaign-ads'] = isset($_POST['campaign-ads']) ? $_POST['campaign-ads'] : array();
+
         foreach ($fields as $key) {
-            $this->data[$key] = isset($_POST[$key]) ? trim($_POST[$key]) : $this->details[$key];
+            $this->data[$key] = isset($_POST[$key]) ?
+                trim($_POST[$key]) :
+                ($this->campaign_id ? $this->details[$key] : '');
         }
 
-        $this->data['campaign-ads'] = isset($_POST['campaign-ads']) ? $_POST['campaign-ads'] : array();
 
         if (isset($_POST['campaign-create'])) {
             $this->createCampaign();
         } elseif (isset($_POST['campaign-update'])) {
             $this->updateCampaign();
-        } elseif (isset($_POST['campaign-update-view'])) {
+        } elseif (isset($_POST['campaign-update-view']) || isset($_POST['campaign-create-view'])) {
             $this->data['slot-position'] = isset($_POST['slot-position']) ? $_POST['slot-position'] : array();
             $this->data['slot-position-article'] = isset($_POST['slot-position-article']) ? $_POST['slot-position-article'] : array();
             $this->updateView();
         }
 
         $this->loadAds();
-        $this->loadCampaignAds();
-        $this->loadSlots();
+        if ($this->campaign_id) {
+            $this->loadCampaignAds();
+        }
+
+        if ($this->view_id) {
+            $this->loadSlots();
+        }
     }
 
     public function renderCreate() {
@@ -269,7 +280,7 @@ EOQ;
             Admin\View::render('campaign-view', array(
                 'details' => $this->details,
                 'action' => 'create',
-                'ads' => $this->campaign_ads,
+                'campaign_ads' => $this->campaign_ads,
                 'campaign' => $this->data,
                 'slots' => $this->slots,
                 'notice' => isset($this->notice) ? $this->notice : null
