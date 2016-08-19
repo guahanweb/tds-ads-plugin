@@ -62,6 +62,7 @@ class Plugin {
         $settings = Admin\Settings::instance();
         $view = Admin\View::instance();
         $api = Admin\API::instance();
+        $filters = Admin\Filters::instance();
     }
 }
 
