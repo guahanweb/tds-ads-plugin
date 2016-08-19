@@ -3,5 +3,6 @@ CREATE TABLE {{TABLE}} (
     view_id INTEGER UNSIGNED NOT NULL,
     campaign_ad_id INTEGER UNSIGNED DEFAULT NULL,
     position INTEGER UNSIGNED DEFAULT 2,
-    PRIMARY KEY  (id)
+    PRIMARY KEY  (id),
+    UNIQUE KEY  (view_id, campaign_ad_id)
 ) {{CHARSET}};
