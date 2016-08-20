@@ -26,3 +26,10 @@ templates to specify which campaign we wish to display in our post listings. You
 entry into the ad management under the new TDS Ads link in the admin menu:
 
 ![Admin Menu](docs/admin-menu.png)
+
+From the ads page, you will be able to create, update and delete both advertisers and
+individual advertisements. Advertisements are comprised of a reference to an advertiser, a
+name and some raw HTML content. There is a syntax highlighter to help you be sure your content
+is valid HTML. As you enter advertisers and ads, you will see them listed on this screen.
+
+![Advertiser Listing](docs/ad-page.png)
