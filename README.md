@@ -40,6 +40,18 @@ prompted to select which ads you want in your campaign. Keep in mind that you ne
 
 ![Campaign Listing](docs/campaign-page.png)
 
+When creating a campaign, the details are pretty self explanatory, but the *Display* tab may
+merit a picture here. You have the option to specify as many "slots" as you wish. Each slot
+has the concept of being injected _after_ a specified ad. This will be more clear when we get
+into the code necessary to integrate with this system. Finally, each slot is able to specify
+an ad to be rendered - if none is provided, random is the default, and a random ad will be
+chosen to render into the slot.
+
+![Slot View](docs/slots-view.png)
+
+Once you have fully configured your campaign and view rules, you can integrate your template
+to automatically calculate and render your ads into your loops.
+
 ### Rendering Rules
 
 As campaigns are rendered, there are a few rules that are followed. If your ads are not being
@@ -53,3 +65,31 @@ within the same campaign.
 remaining ads within the campaign.
 3. Random slots are always calculated from the top down. If you have configured five slots to
 be randomized, but only 4 ads are remaining in your campaign, the last slot will remain empty.
+
+### Template Integration
+
+We have built a system for the easiest integration we could think of. By triggering an action
+within a post loop and providing a campaign ID and the current index of the loop, the plugin
+will render all the appropriate markup and JavaScript to render your specified ads. Notice the
+`hook` column in the campaign list view. This is the name of your action that you need to 
+execute to render that campaign.
+
+Assume we have created a campaign with the ID of `8`: this will show up with a hook of
+`tds_campaign_8` in our list view. Now, the following code will render this campaign within a
+loop of posts in our site:
+
+```
+// Loop over the posts, and use the index to call our new action
+if (have_posts()): // start the loop
+    $index = 0;
+    while (have_posts()): the_post();
+        ++$index;
+
+        // Do whatever you want to render your post
+        get_template_part('content', get_post_format($post->ID));
+
+        // This is the magic code to apply the ad campaign to this loop
+        do_action('tds_ad_campaign', 'tds_campaign_8', $index);
+    ehdwhile;
+endif;
+```
