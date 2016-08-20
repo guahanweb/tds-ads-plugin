@@ -69,14 +69,16 @@ be randomized, but only 4 ads are remaining in your campaign, the last slot will
 Let's walk through a possible configuration that might cause confusion without putting some
 thought into it. Assume we have the following configuration:
 
-> _Ads:_
-> [10] Test Ad 1
-> [18] Test Ad 2
->
-> _Slots:_
-> [1] After article 2, Test Ad 1 is displayed
-> [2] After article 5, random ad is displayed
-> [3] After article 8, Test Ad 2 is displayed
+```
+Ads:
+[10] Test Ad 1
+[18] Test Ad 2
+
+Slots:
+[1] After article 2, Test Ad 1 is displayed
+[2] After article 5, random ad is displayed
+[3] After article 8, Test Ad 2 is displayed
+```
 
 This is a legitimate configuration, but in reality, only two ads will be rendered, one after
 article 2 and another after article 8. Can you see why? Notice that there are only _two_ ads
@@ -109,7 +111,7 @@ Assume we have created a campaign with the ID of `8`: this will show up with a h
 `tds_campaign_8` in our list view. Now, the following code will render this campaign within a
 loop of posts in our site:
 
-```
+```php
 // Loop over the posts, and use the index to call our new action
 if (have_posts()): // start the loop
     $index = 0;
