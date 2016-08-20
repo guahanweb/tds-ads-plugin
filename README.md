@@ -22,4 +22,7 @@ database, using your WP instance prefix.
 
 Once installed, there are a couple different pieces to this plugin. First, we have to set up
 our advertisers, ads, campaigns and view rules. Once this is done, we have to modify our
-templates to specify which campaign we wish to display in our post listings.
+templates to specify which campaign we wish to display in our post listings. You can find the
+entry into the ad management under the new TDS Ads link in the admin menu:
+
+![Admin Menu](blob/master/docs/admin-menu.png)
