@@ -62,9 +62,25 @@
     };
 
     function init() {
+        var sticky = [];
+        var random = [];
         $('div[data-tds-campaign]').each(function (i, el) {
             var slot = new Slot(el);
-            slot.load();
+            // we need to sort them into types so we can render
+            // all the sticky ones first.
+            if (slot.random) {
+                random.push(slot);
+            } else {
+                sticky.push(slot);
+            }
         });
+
+        console.log(sticky, random);
+        sticky.forEach(loadSlot);
+        random.forEach(loadSlot);
+    }
+
+    function loadSlot(slot) {
+        slot.load();
     }
 })(jQuery);
