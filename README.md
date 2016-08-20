@@ -25,4 +25,4 @@ our advertisers, ads, campaigns and view rules. Once this is done, we have to mo
 templates to specify which campaign we wish to display in our post listings. You can find the
 entry into the ad management under the new TDS Ads link in the admin menu:
 
-![Admin Menu](blob/master/docs/admin-menu.png)
+![Admin Menu](docs/admin-menu.png)
