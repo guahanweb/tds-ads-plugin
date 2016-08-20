@@ -33,3 +33,23 @@ name and some raw HTML content. There is a syntax highlighter to help you be sur
 is valid HTML. As you enter advertisers and ads, you will see them listed on this screen.
 
 ![Advertiser Listing](docs/ad-page.png)
+
+The campaign dashboard is where the magic happens. When you create a new campaign, you will be
+prompted to select which ads you want in your campaign. Keep in mind that you need to select
+*all* ads that you wish to appear at any point in your campaign.
+
+![Campaign Listing](docs/campaign-page.png)
+
+### Rendering Rules
+
+As campaigns are rendered, there are a few rules that are followed. If your ads are not being
+displayed quite like you expected, refer to the following checklist to be sure you have
+configured your campaign appropriately:
+
+1. First, no ad will *ever* appear more than one time in a given campaign. If you have
+configured an ad to be rendered in a sticky slot, it will not ever appear in a random slot
+within the same campaign.
+2. Sticky slots are rendered *first*. Random slots are then calculated and rendered from the
+remaining ads within the campaign.
+3. Random slots are always calculated from the top down. If you have configured five slots to
+be randomized, but only 4 ads are remaining in your campaign, the last slot will remain empty.
